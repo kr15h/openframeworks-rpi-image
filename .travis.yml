@@ -1,12 +1,13 @@
 env:
-- OF_VERSION="v0.9.8"
-- OF_FILE="of_v0.9.8_linuxarmv6l_release.tar.gz"
-- OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}"
-- GPU_MEM=256
-- RPI_VERSION="raspbian_lite-2017-07-05"
-- RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip"
-- RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}"
-- IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
+  global:
+    - OF_VERSION="v0.9.8"
+    - OF_FILE="of_v0.9.8_linuxarmv6l_release.tar.gz"
+    - OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}"
+    - GPU_MEM=256
+    - RPI_VERSION="raspbian_lite-2017-07-05"
+    - RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip"
+    - RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}"
+    - IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
 dist: trusty
 sudo: required
 addons:

@@ -86,10 +86,10 @@ cp "${MOUNT}/etc/ld.so.preload" "${MOUNT}/etc/_ld.so.preload"
 echo "" > "${MOUNT}/etc/ld.so.preload"
 
 # Forward constants that we will need in the script.
-chroot "${MOUNT}" "export OF_VERSION=${OF_VERSION}"
-chroot "${MOUNT}" "export OF_FILE=${OF_FILE}"
-chroot "${MOUNT}" "export OF_URL=${OF_URL}"
-chroot "${MOUNT}" "export GPU_MEM=${GPU_MEM}"
+chroot "${MOUNT}" /bin/bash -c 'OF_VERSION="${OF_VERSION}"'
+chroot "${MOUNT}" /bin/bash -c 'OF_FILE="${OF_FILE}"'
+chroot "${MOUNT}" /bin/bash -c 'OF_URL="${OF_URL}"'
+chroot "${MOUNT}" /bin/bash -c 'GPU_MEM="${GPU_MEM}"'
 
 # Run the installation script as if we would be inside the Raspberry Pi.
 chroot "${MOUNT}" "/tmp/${SCRIPT}"

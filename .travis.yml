@@ -1,12 +1,12 @@
 env:
-  - OF_VERSION="v0.9.8"
-  - OF_FILE="of_v0.9.8_linuxarmv6l_release.tar.gz"
-  - OF_URL="http://openframeworks.cc/versions/$OF_VERSION/$OF_FILE"
-  - GPU_MEM=256
-  - RPI_VERSION="raspbian_lite-2017-07-05"
-  - RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip"
-  - RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}"
-  - IMAGE="${RPI_VERSION}-openFrameworks-${OF_VERSION}.img"
+- OF_VERSION="v0.9.8"
+- OF_FILE="of_v0.9.8_linuxarmv6l_release.tar.gz"
+- OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}"
+- GPU_MEM=256
+- RPI_VERSION="raspbian_lite-2017-07-05"
+- RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip"
+- RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}"
+- IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
 dist: trusty
 sudo: required
 addons:
@@ -25,9 +25,9 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: eXIX1Z621z/KMIITv/7lpdHHO8fo7zU5pSGD8oHoH/O36IO0YKbNQHf5VfPbEUyUJfZaH37ZbwOAZ2WSMNxR4zbq+skn00wYvHRy8V73/6opWL5p6kZfbVVOK5nNb9pU31BYCoU94rL9wPJasQVj85eiw/Guvp+4hNOP4pWyVJFO+aGArFJHCZAd6HqoUVgEwRhteTxhTSo+wAzdMTWfVtCXnZ/UEmBIZZUglM6SFe3mPwLnP1rgbDbLKT8c4ZmyCNL03CaDIWms/QHeqj0Bx3ty5SU22Xl1ZUG1iYxGGoT0n2o6rKKtquFeZwnyOJEdNT54jxZP8AAS3oD2y5hiCJ+RlKAmu6+Ea5xtkjX5agmSgqb6eAMZ3fOidPnpuxVkQj0/L5R/kaKIKcOa5tr9TFgVJo/2/KlZPEzSs0+mRyUH5zLDghl2KlrJ9YGaJSzL0n25d+dr+66+ygvwDWz5wkJW/Ta854vxbbl8A7UZ2hpTe0R2mU7GI3YGnzEJGE/ViOplpSVv60dV/thecqdJ1PIZKOtodAoABZFumu9dVhgSJ7tuXzpvOHgWwR5tU6Tr1T3hZ5K5FhxkMviZ7pvgceMDfzw5UKK2QGqneL4QLRVCqC1PSZsp/FGUeFx4rbef6qJRop648AL9ZJ2RY450w/o+rFOS3xvpEnfmVtr3hpQ=
+    secure: K+yEsjFggk4VoTCl2kx1MutVtl9ilewT36EKhmVXneAU77ASDGhCiF5/p+//jGJS2Htll9sIGocG/kQ/ojy9BvuoECBLshzh8N6O+HkKeLW7mj3lZDXYL+fjLShtFx77l7Y0SbOletwOu3oi9rl6o4G91mqGPbwHYH1BqQwILJurOKCvyi27Osxf42z87LsybbknAf7ONb8B2sXvLXHdpstzjRqHHneyp0SRQ5wFPNruIfF+DhJKCykquso3vMf/yBONS/jMs4OnWXZOSrs4EP5mHRV5k+aEQfBnaTqN7yQ5hyOV2BpHORkR6KFM8AAN4TIQNrFOSFmCvgchBKuFi6HrsxB8X2i93rISrvopRZBWaINBkWg6d16PS5xpxVNps9emrX+g6wH/AZW4B/3GHmAVB1Dm53VxlAiy3JHv/v6gRl9hWEnnFlr+zus2zv2gcjj8dpx7qnx1A1aBXaUAibfseAgMQ86fVMFx7D5lQSBuVdPYe084QwU5qVDt5g287ZauuBdGPS9mL3m59SAj3f/7MeQwhW/F40ZGMsihNkYmZkv29mVBmK7yu+y93e3C1aKZFEXY9UdCI1Eov0CSNpIL2exfJ8wBP3hfpZwn6MvTAwZkuj653zMil6sW1Ob0hcOGeb2IbrUeV0RYF3A4euR0lIeinZdLBjZyC6pr2RI=
   file: 
-    - "${IMAGE}"
+    - "${IMAGE}.zip"
   skip_cleanup: true
   on:
-    tags: true
+    repo: kr15h/openframeworks-rpi-image

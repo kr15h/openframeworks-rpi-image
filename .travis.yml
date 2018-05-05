@@ -30,4 +30,4 @@ deploy:
     - "${IMAGE}.zip"
   skip_cleanup: true
   on:
-    repo: kr15h/openframeworks-rpi-image
+    tags: true

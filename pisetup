@@ -61,15 +61,4 @@ sed -i "s/apt-get/apt-get -y/g" install_dependencies.sh
 ./install_dependencies.sh
 make -j$(nproc) Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project
 
-# Test installation
-echo "Compiling polygonExample."
-cd /home/pi/openFrameworks/examples/graphics/polygonExample
-make -j$(nproc)
-
-echo "Setting up to run on boot."
-crontab -l > mycron
-echo "@reboot /home/pi/openFrameworks/examples/graphics/polygonExample/bin/polygonExample" >> mycron
-crontab mycron
-rm mycron
-
 echo "Congratulations! Compiled version of openFrameworks $OF_VERSION has been setup!"

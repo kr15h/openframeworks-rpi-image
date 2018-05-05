@@ -1,5 +1,7 @@
 # openFrameworks RPi Image
 
+[![Build Status](https://travis-ci.org/kr15h/openframeworks-rpi-image.svg?branch=master)](https://travis-ci.org/kr15h/openframeworks-rpi-image)
+
 Setup that creates a bootable Raspberry Pi disk image with openFrameworks compiled. You can use this as a foundation for your openFrameworks Raspberry Pi projects. 
 
 ## Usage

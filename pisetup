@@ -38,10 +38,12 @@ cat /etc/hostname
 echo "Setting gpu_mem."
 if grep -q "gpu_mem" /boot/config.txt
 then
-    sed -i "s/gpu_mem.*/gpu_mem=${GPU_MEM}/" /boot/config.txt
-else
-    echo "gpu_mem=${GPU_MEM}" >> /boot/config.txt
+    sed -i "s/gpu_mem.*//" /boot/config.txt
 fi
+
+echo "gpu_mem_256=${GPU_MEM_256}" >> /boot/config.txt
+echo "gpu_mem_512=${GPU_MEM_512}" >> /boot/config.txt
+echo "gpu_mem_1024=${GPU_MEM_1024}" >> /boot/config.txt
 cat /boot/config.txt | grep "gpu_mem"
 
 echo "Installing packages."

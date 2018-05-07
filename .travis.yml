@@ -3,7 +3,9 @@ env:
     - OF_VERSION="v0.9.8"
     - OF_FILE="of_v0.9.8_linuxarmv6l_release.tar.gz"
     - OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}"
-    - GPU_MEM=256
+    - GPU_MEM_256=128
+    - GPU_MEM_512=256
+    - GPU_MEM_1024=512
     - RPI_VERSION="raspbian_lite-2017-07-05"
     - RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip"
     - RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}"

@@ -89,7 +89,9 @@ echo "" > "${MOUNT}/etc/ld.so.preload"
 chroot "${MOUNT}" /bin/bash -c 'OF_VERSION="${OF_VERSION}"'
 chroot "${MOUNT}" /bin/bash -c 'OF_FILE="${OF_FILE}"'
 chroot "${MOUNT}" /bin/bash -c 'OF_URL="${OF_URL}"'
-chroot "${MOUNT}" /bin/bash -c 'GPU_MEM="${GPU_MEM}"'
+chroot "${MOUNT}" /bin/bash -c 'GPU_MEM_256="${GPU_MEM_256}"'
+chroot "${MOUNT}" /bin/bash -c 'GPU_MEM_512="${GPU_MEM_512}"'
+chroot "${MOUNT}" /bin/bash -c 'GPU_MEM_1024="${GPU_MEM_1024}"'
 
 # Run the installation script as if we would be inside the Raspberry Pi.
 chroot "${MOUNT}" "/tmp/${SCRIPT}"

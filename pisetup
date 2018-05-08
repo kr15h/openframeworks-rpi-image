@@ -52,7 +52,7 @@ apt-get -y install git
 
 echo "Downloading openFrameworks."
 cd /home/pi
-wget "${OF_URL}"
+wget --no-check-certificate "${OF_URL}"
 mkdir openFrameworks
 tar vxfz "${OF_FILE}" -C openFrameworks --strip-components 1
 cd /home/pi/openFrameworks/scripts/linux/debian

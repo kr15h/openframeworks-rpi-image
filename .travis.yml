@@ -1,36 +1,35 @@
+language: c++
+sudo: true
 env:
   global:
-    - OF_VERSION="v0.9.8"
-    - OF_FILE="of_v0.9.8_linuxarmv6l_release.tar.gz"
-    - OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}"
-    - GPU_MEM_256=128
-    - GPU_MEM_512=256
-    - GPU_MEM_1024=512
-    - RPI_VERSION="raspbian_lite-2017-07-05"
-    - RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip"
-    - RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}"
-    - IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
-dist: trusty
-sudo: required
-addons:
-  apt:
-    packages:
-    - qemu
-    - qemu-user-static
-    - binfmt-support
-    - parted
-    - wget
-    - dosfstools
-    - zip
-script:
-- sudo bash ./mkimage
-- zip ${IMAGE}.zip ${IMAGE}
-deploy:
-  provider: releases
-  api_key:
-    secure: K+yEsjFggk4VoTCl2kx1MutVtl9ilewT36EKhmVXneAU77ASDGhCiF5/p+//jGJS2Htll9sIGocG/kQ/ojy9BvuoECBLshzh8N6O+HkKeLW7mj3lZDXYL+fjLShtFx77l7Y0SbOletwOu3oi9rl6o4G91mqGPbwHYH1BqQwILJurOKCvyi27Osxf42z87LsybbknAf7ONb8B2sXvLXHdpstzjRqHHneyp0SRQ5wFPNruIfF+DhJKCykquso3vMf/yBONS/jMs4OnWXZOSrs4EP5mHRV5k+aEQfBnaTqN7yQ5hyOV2BpHORkR6KFM8AAN4TIQNrFOSFmCvgchBKuFi6HrsxB8X2i93rISrvopRZBWaINBkWg6d16PS5xpxVNps9emrX+g6wH/AZW4B/3GHmAVB1Dm53VxlAiy3JHv/v6gRl9hWEnnFlr+zus2zv2gcjj8dpx7qnx1A1aBXaUAibfseAgMQ86fVMFx7D5lQSBuVdPYe084QwU5qVDt5g287ZauuBdGPS9mL3m59SAj3f/7MeQwhW/F40ZGMsihNkYmZkv29mVBmK7yu+y93e3C1aKZFEXY9UdCI1Eov0CSNpIL2exfJ8wBP3hfpZwn6MvTAwZkuj653zMil6sW1Ob0hcOGeb2IbrUeV0RYF3A4euR0lIeinZdLBjZyC6pr2RI=
-  file: 
-    - "${IMAGE}.zip"
-  skip_cleanup: true
-  on:
-    tags: true
+  - GPU_MEM_256=128
+  - GPU_MEM_512=256
+  - GPU_MEM_1024=512
+matrix:
+  include:
+  - os: linux
+    dist: trusty
+    sudo: required
+    env: RPI_VERSION="raspbian_lite-2017-07-05" RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip" RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}" OF_VERSION="v0.9.8" OF_FILE="of_v0.9.8_linuxarmv6l_release.tar.gz" OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}" IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
+    addons:
+      apt:
+        packages:
+        - qemu
+        - qemu-user-static
+        - binfmt-support
+        - parted
+        - wget
+        - dosfstools
+        - zip
+    script:
+    - sudo bash ./of_v0.9.8/mkimage
+    - zip ./of_v0.9.8/${IMAGE}.zip ./of_v0.9.8/${IMAGE}
+    deploy:
+      provider: releases
+      api_key:
+        secure: K+yEsjFggk4VoTCl2kx1MutVtl9ilewT36EKhmVXneAU77ASDGhCiF5/p+//jGJS2Htll9sIGocG/kQ/ojy9BvuoECBLshzh8N6O+HkKeLW7mj3lZDXYL+fjLShtFx77l7Y0SbOletwOu3oi9rl6o4G91mqGPbwHYH1BqQwILJurOKCvyi27Osxf42z87LsybbknAf7ONb8B2sXvLXHdpstzjRqHHneyp0SRQ5wFPNruIfF+DhJKCykquso3vMf/yBONS/jMs4OnWXZOSrs4EP5mHRV5k+aEQfBnaTqN7yQ5hyOV2BpHORkR6KFM8AAN4TIQNrFOSFmCvgchBKuFi6HrsxB8X2i93rISrvopRZBWaINBkWg6d16PS5xpxVNps9emrX+g6wH/AZW4B/3GHmAVB1Dm53VxlAiy3JHv/v6gRl9hWEnnFlr+zus2zv2gcjj8dpx7qnx1A1aBXaUAibfseAgMQ86fVMFx7D5lQSBuVdPYe084QwU5qVDt5g287ZauuBdGPS9mL3m59SAj3f/7MeQwhW/F40ZGMsihNkYmZkv29mVBmK7yu+y93e3C1aKZFEXY9UdCI1Eov0CSNpIL2exfJ8wBP3hfpZwn6MvTAwZkuj653zMil6sW1Ob0hcOGeb2IbrUeV0RYF3A4euR0lIeinZdLBjZyC6pr2RI=
+      file: 
+      - "./of_v0.9.8/${IMAGE}.zip"
+      skip_cleanup: true
+      on:
+        tags: true

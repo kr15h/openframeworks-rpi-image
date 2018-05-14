@@ -47,8 +47,8 @@ echo "gpu_mem_1024=${GPU_MEM_1024}" >> /boot/config.txt
 cat /boot/config.txt | grep "gpu_mem"
 
 echo "Installing packages."
-apt-get -yq update
-apt-get -yq install git
+apt-get -y update
+apt-get -y install git
 
 echo "Downloading openFrameworks."
 cd /home/pi
@@ -58,7 +58,7 @@ tar vxfz "${OF_FILE}" -C openFrameworks --strip-components 1
 cd /home/pi/openFrameworks/scripts/linux/debian
 
 # This is needed to install everything automatically without interaction
-sed -i "s/apt-get/apt-get -yq/g" install_dependencies.sh
+sed -i "s/apt-get/apt-get -y/g" install_dependencies.sh
 
 ./install_dependencies.sh
 #make -j$(nproc) Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project

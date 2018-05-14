@@ -5,16 +5,16 @@ sudo: true
 
 env:
   global:
-    - PATH=$HOME/.local/bin:$PATH
-    - GPU_MEM_256=128
-    - GPU_MEM_512=256
-    - GPU_MEM_1024=512
-    - AWS_BUCKET="openframeworks-rpi-image"
-    - AWS_SHARED="~/shared"
+  - PATH=$HOME/.local/bin:$PATH
+  - GPU_MEM_256=128
+  - GPU_MEM_512=256
+  - GPU_MEM_1024=512
+  - AWS_BUCKET="openframeworks-rpi-image"
+  - AWS_SHARED="~/shared"
 
 before_install:
-  - pip install --user awscli
-  - mkdir -p "${AWS_SHARED}"
+- pip install --user awscli
+- mkdir -p "${AWS_SHARED}"
 
 jobs:
   include:

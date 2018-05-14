@@ -56,7 +56,7 @@ parted --script "${loopdev}" print
 parted --script "${loopdev}" resizepart 2 100%
 parted --script "${loopdev}" print
 
-e2fsck -f "${loopdev}p2"
+e2fsck -f -y "${loopdev}p2"
 resize2fs "${loopdev}p2"
 
 # Mount the image

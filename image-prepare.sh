@@ -14,7 +14,7 @@ fi
 # Image creation constants.
 # See .travis.yml for environment variables.
 MOUNT="mnt"
-SCRIPT="pisetup"
+SCRIPT="image-prepare-script.sh"
 
 # Unmount drives and general cleanup on exit, the trap ensures this will always
 # run execpt in the most extream cases.

@@ -33,35 +33,17 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Download prepared image from the previous build step
-IMAGE_WIP_FILE="${IMAGE}.wip.zip"
-IMAGE_WIP_URL="https://github.com/kr15h/openframeworks-rpi-image/releases/download/${TRAVIS_TAG}/${IMAGE_WIP_FILE}"
-[ ! -f "${IMAGE_WIP_FILE}" ] && wget "${IMAGE_WIP_URL}"
-
 # Clean the existing image files
 (ls *.img >> /dev/null 2>&1 && rm *.img) || echo "no .img files to remove"
 
-# Unzip Raspbian
-# -u  update files, create if necessary
-#unzip -u "${RPI_ZIP}"
-
 # Unzip image file
+unzip -u "${IMAGE}.zip"
 
 mv "$(ls *.img | head -n 1)" "${IMAGE}"
-
-# Add 1G to the image size
-#dd if=/dev/zero bs=1M count=1024 >> "${IMAGE}"
 
 # Configure loopback device to expand partition 2
 loopdev=$(losetup --find --show "${IMAGE}")
 echo "Created loopback device ${loopdev}"
-
-#parted --script "${loopdev}" print
-#parted --script "${loopdev}" resizepart 2 100%
-#parted --script "${loopdev}" print
-
-#e2fsck -f "${loopdev}p2"
-#resize2fs "${loopdev}p2"
 
 # Mount the image
 echo "Mounting filesystem."
@@ -88,14 +70,6 @@ cp /etc/resolv.conf "${MOUNT}/etc/resolv.conf"
 cp /usr/bin/qemu-arm-static "${MOUNT}/usr/bin"
 cp "${MOUNT}/etc/ld.so.preload" "${MOUNT}/etc/_ld.so.preload"
 echo "" > "${MOUNT}/etc/ld.so.preload"
-
-# Forward constants that we will need in the script.
-chroot "${MOUNT}" /bin/bash -c 'OF_VERSION="${OF_VERSION}"'
-chroot "${MOUNT}" /bin/bash -c 'OF_FILE="${OF_FILE}"'
-chroot "${MOUNT}" /bin/bash -c 'OF_URL="${OF_URL}"'
-chroot "${MOUNT}" /bin/bash -c 'GPU_MEM_256="${GPU_MEM_256}"'
-chroot "${MOUNT}" /bin/bash -c 'GPU_MEM_512="${GPU_MEM_512}"'
-chroot "${MOUNT}" /bin/bash -c 'GPU_MEM_1024="${GPU_MEM_1024}"'
 
 # Run the installation script as if we would be inside the Raspberry Pi.
 chroot "${MOUNT}" "/tmp/${SCRIPT}"

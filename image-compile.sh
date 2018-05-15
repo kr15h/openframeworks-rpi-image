@@ -46,8 +46,8 @@ echo "Created loopback device ${loopdev}"
 # Mount the image
 echo "Mounting filesystem."
 
-bootdev=$(ls "${loopdev}p1")
-rootdev=$(ls "${loopdev}p2")
+bootdev="${loopdev}p1"
+rootdev="${loopdev}p2"
 partprobe "${loopdev}"
 
 [ ! -d "${MOUNT}" ] && mkdir "${MOUNT}"

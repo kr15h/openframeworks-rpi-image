@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "Hello. This is compile script."
+echo "Start of image-compile-script.sh"
 
-echo "Compiling openFrameworks."
-make -j $(nproc) Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project
+echo "Compiling openFrameworks..."
+timeout 30m make -j $(nproc) Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project
 
-echo "Congratulations! openFrameworks $OF_VERSION has been compiled."
+echo "End of image-compile-script.sh"

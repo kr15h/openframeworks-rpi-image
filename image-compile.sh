@@ -38,6 +38,7 @@ trap cleanup EXIT
 
 # Unzip image file
 unzip -u "${IMAGE}.zip"
+rm "${IMAGE}.zip"
 
 # Configure loopback device to expand partition 2
 loopdev=$(losetup --find --show "${IMAGE}")

@@ -42,6 +42,7 @@ trap cleanup EXIT
 # Unzip Raspbian
 # -u  update files, create if necessary
 unzip -u "${RPI_ZIP}"
+rm "${RPI_ZIP}"
 
 mv "$(ls *.img | head -n 1)" "${IMAGE}"
 

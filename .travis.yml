@@ -6,6 +6,7 @@ os: linux
 dist: trusty
 
 env:
+- RPI_VERSION="raspbian_lite-2017-07-05" RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip" RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}" OF_VERSION="v0.10.0" OF_FILE="of_v0.10.0_linuxarmv6l_release.tar.gz" OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}" IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
   global:
   - PATH=$HOME/.local/bin:$PATH
   - GPU_MEM_256=128
@@ -22,7 +23,6 @@ before_install:
 jobs:
   include:
   - stage: prepare
-    env: RPI_VERSION="raspbian_lite-2017-07-05" RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip" RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}" OF_VERSION="v0.10.0" OF_FILE="of_v0.10.0_linuxarmv6l_release.tar.gz" OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}" IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
     addons:
       apt:
         packages:

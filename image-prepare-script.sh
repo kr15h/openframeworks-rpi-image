@@ -62,6 +62,5 @@ cd /home/pi/openFrameworks/scripts/linux/debian
 sed -i "s/apt-get/apt-get -y/g" install_dependencies.sh
 
 ./install_dependencies.sh
-#make -j$(nproc) Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project
 
 echo "Congratulations! openFrameworks $OF_VERSION is ready to compile now."

@@ -30,6 +30,7 @@ addons:
 before_install:
 - pip install --user awscli
 - mkdir -p "${AWS_SHARED}"
+- aws s3 rm "*"
 
 jobs:
   include:
@@ -41,6 +42,7 @@ jobs:
   - stage: compile
     script:
     - aws s3 sync "s3://${AWS_BUCKET}" "${AWS_SHARED}"
+    - aws s3 rm "*"
     - mv "${AWS_SHARED}/${IMAGE}.zip" "./${IMAGE}.zip"
     - sudo bash ./image-compile.sh
     - zip "${IMAGE}.zip" "./${IMAGE}"

@@ -17,6 +17,7 @@ env:
 before_install:
 - pip install --user awscli
 - mkdir -p "${AWS_SHARED}"
+- aws s3 rm "*"
 
 jobs:
   include:

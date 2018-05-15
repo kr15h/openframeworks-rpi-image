@@ -35,6 +35,6 @@ jobs:
         - python
     script:
     - sudo bash ./image-prepare.sh
-    - zip ./${IMAGE}.zip "${AWS_SHARED}/${IMAGE}"
+    - zip "${AWS_SHARED}/${IMAGE}.zip" "./${IMAGE}"
     - aws s3 sync "${AWS_SHARED}" "s3://${AWS_BUCKET}"
 

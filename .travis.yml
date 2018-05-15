@@ -6,6 +6,7 @@ os: linux
 dist: trusty
 
 env:
+- RPI_VERSION="raspbian_lite-2017-07-05" RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip" RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}" OF_VERSION="v0.10.0" OF_FILE="of_v0.10.0_linuxarmv6l_release.tar.gz" OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}" IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
   global:
   - PATH=$HOME/.local/bin:$PATH
   - GPU_MEM_256=128
@@ -13,18 +14,6 @@ env:
   - GPU_MEM_1024=512
   - AWS_BUCKET="openframeworks-rpi-image"
   - AWS_SHARED="~/shared"
-
-addons:
-  apt:
-    packages:
-    - qemu
-    - qemu-user-static
-    - binfmt-support
-    - parted
-    - wget
-    - dosfstools
-    - zip
-    - python
 
 before_install:
 - pip install --user awscli
@@ -34,13 +23,33 @@ before_install:
 jobs:
   include:
   - stage: prepare
-    env: - RPI_VERSION="raspbian_lite-2017-07-05" RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip" RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}" OF_VERSION="v0.10.0" OF_FILE="of_v0.10.0_linuxarmv6l_release.tar.gz" OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}" IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
+    addons:
+      apt:
+        packages:
+        - qemu
+        - qemu-user-static
+        - binfmt-support
+        - parted
+        - wget
+        - dosfstools
+        - zip
+        - python
     script:
     - sudo bash ./image-prepare.sh
     - zip "${AWS_SHARED}/${IMAGE}.zip" "./${IMAGE}"
     - aws s3 sync "${AWS_SHARED}" "s3://${AWS_BUCKET}"
   - stage: compile
-    env: - RPI_VERSION="raspbian_lite-2017-07-05" RPI_ZIP="2017-07-05-raspbian-jessie-lite.zip" RPI_URL="http://downloads.raspberrypi.org/raspbian_lite/images/${RPI_VERSION}/${RPI_ZIP}" OF_VERSION="v0.10.0" OF_FILE="of_v0.10.0_linuxarmv6l_release.tar.gz" OF_URL="http://openframeworks.cc/versions/${OF_VERSION}/${OF_FILE}" IMAGE="${RPI_VERSION}-of_${OF_VERSION}.img"
+    addons:
+      apt:
+        packages:
+        - qemu
+        - qemu-user-static
+        - binfmt-support
+        - parted
+        - wget
+        - dosfstools
+        - zip
+        - python
     script:
     - aws s3 sync "s3://${AWS_BUCKET}" "${AWS_SHARED}"
     - aws s3 rm "*"

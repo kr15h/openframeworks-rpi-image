@@ -54,7 +54,8 @@ echo "Downloading openFrameworks."
 cd /home/pi
 wget --no-check-certificate --progress=bar:force "${OF_URL}"
 mkdir openFrameworks
-tar vxfz "${OF_FILE}" -C openFrameworks --strip-components 1
+echo "Unarchiving ${OF_FILE}"
+tar xfz "${OF_FILE}" -C openFrameworks --strip-components 1
 cd /home/pi/openFrameworks/scripts/linux/debian
 
 # This is needed to install everything automatically without interaction

@@ -34,7 +34,7 @@ cleanup() {
 trap cleanup EXIT
 
 # Download raspbian arm only if we have not already done so
-[ ! -f "${RPI_ZIP}" ] && wget "${RPI_URL}"
+[ ! -f "${RPI_ZIP}" ] && wget --progress=bar:force "${RPI_URL}"
 
 # Clean the existing image files
 (ls *.img >> /dev/null 2>&1 && rm *.img) || echo "no .img files to remove"
